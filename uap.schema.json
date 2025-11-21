@@ -1,0 +1,46 @@
+```json
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Universal Agent Protocol (UAP) Manifest",
+  "description": "The open standard for digital labor. Managed by OpenLabor xyz.",
+  "version": "1.0.0",
+  "type": "object",
+  "required": ["id", "name", "runtime", "capabilities", "billing"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^uap\\.[a-z0-9-]+\\.[a-z0-9]+$",
+      "description": "Unique Agent ID (e.g., uap.finance.subkiller)"
+    },
+    "name": { "type": "string" },
+    "runtime": {
+      "type": "object",
+      "required": ["kernel"],
+      "properties": {
+        "kernel": { "type": "string", "enum": ["gemini-3-pro", "gpt-5", "claude-3-opus", "open-source-llama"] }
+      }
+    },
+    "capabilities": {
+      "type": "object",
+      "required": ["tools", "output_mode"],
+      "properties": {
+        "tools": { "type": "array", "items": { "type": "string" } },
+        "output_mode": { "type": "string", "enum": ["action", "text", "stream"] }
+      }
+    },
+    "billing": {
+      "type": "object",
+      "required": ["type", "terms"],
+      "properties": {
+        "type": { "type": "string", "enum": ["outcome_based", "subscription", "pay_per_token"] },
+        "terms": {
+          "type": "object",
+          "properties": {
+            "trigger_event": { "type": "string" },
+            "commission_rate": { "type": "number", "minimum": 0, "maximum": 1 }
+          }
+        }
+      }
+    }
+  }
+}
