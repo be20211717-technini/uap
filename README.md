@@ -35,4 +35,7 @@ Define your worker in UAP format:
     "terms": { "trigger_event": "REFUND_SUCCESS", "commission_rate": 0.2 }
   }
 }
+
+
+
 Copyright © 2025 OpenLabor xyz. Released under the MIT License.
